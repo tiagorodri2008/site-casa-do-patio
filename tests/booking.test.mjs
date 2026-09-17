@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import {validateBooking,lisbonDate} from '../lib/booking.mjs';
+const now=new Date('2026-09-17T18:15:00Z');
+const valid={date:'2026-09-18',time:'19:30',guests:'2'};
+assert.equal(validateBooking(valid,now),null);
+assert.equal(validateBooking({...valid,date:'2026-09-21'},now),'closed');
+assert.equal(validateBooking({...valid,date:'2026-09-16'},now),'past');
+assert.equal(validateBooking({...valid,date:'2026-02-30'},now),'date');
+assert.equal(validateBooking({...valid,date:'2027-01-01'},now),'future');
+assert.equal(validateBooking({...valid,time:'03:00'},now),'time');
+assert.equal(validateBooking({...valid,guests:'9'},now),'guests');
+assert.equal(validateBooking({...valid,guests:'2.5'},now),'guests');
+assert.equal(validateBooking({...valid,date:'2026-09-17',time:'19:00'},now),'elapsed');
+assert.equal(validateBooking({...valid,date:'2026-09-17',time:'19:30'},now),null);
+assert.equal(lisbonDate(new Date('2026-09-17T23:30:00Z')),'2026-09-18');
+console.log('11 booking checks passed: dates, closure, hours, guests and Lisbon timezone.');

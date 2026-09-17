@@ -1,0 +1,2 @@
+import {Shell} from '@/components/shell';
+export default function NotFound(){return <Shell locale="pt"><main id="main" className="not-found"><p className="eyebrow">404 · CASA DO PÁTIO</p><h1>Esta mesa<br/><em>não existe.</em></h1><p>Mas há muito para descobrir por aqui.<br/><span lang="en">Page not found. Let’s find your way back.</span></p><div className="actions"><a className="button" href="/">Voltar à casa</a><a className="text-link" href="/pt/menu/">Ver menu</a></div></main></Shell>}

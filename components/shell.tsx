@@ -1,0 +1,6 @@
+import {Locale,restaurant,route} from '@/lib/restaurant';
+import {copy} from '@/lib/copy';
+import {Header,MobileActions} from './navigation';
+import {ArrowUpRight} from 'lucide-react';
+import type {CSSProperties} from 'react';
+export function Shell({locale,slug='',children}:{locale:Locale;slug?:string;children:React.ReactNode}){return <div lang={locale==='pt'?'pt-PT':'en'} style={{'--cream':restaurant.theme.cream,'--ink':restaurant.theme.ink,'--rust':restaurant.theme.accent} as CSSProperties}><Header locale={locale} slug={slug}/>{children}<footer className="footer"><div className="footer-top"><a className="brand" href={route(locale)}>casa do pátio<span>{copy.tagline[locale]}</span></a><p>{restaurant.location[locale]}<br/>{copy.hoursShort[locale]}</p><a className="text-link" href={route(locale,'reservas')}>{copy.book[locale]}<ArrowUpRight size={16}/></a></div><div className="footer-bottom"><div><strong>{copy.demo[locale]}</strong><p>{copy.demoFooter[locale]}</p></div><div className="legal-links"><a href={route(locale,'privacidade')}>{copy.privacy[locale]}</a><a href={route(locale,'cookies')}>{copy.cookies[locale]}</a><a href={route(locale,'termos')}>{copy.terms[locale]}</a></div></div></footer><MobileActions locale={locale} slug={slug}/></div>}

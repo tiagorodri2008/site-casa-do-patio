@@ -1,0 +1,2 @@
+import {restaurant} from '@/lib/restaurant';
+export function Photo({kind,alt,priority=false,className=''}:{kind:'hero'|'dish'|'table';alt:string;priority?:boolean;className?:string}){const src=restaurant.images[kind];return <img className={className} src={`${src}-1200.webp`} srcSet={`${src}-640.webp 640w, ${src}-1200.webp 1200w, ${src}-1600.webp 1600w`} sizes="(max-width: 760px) 100vw, 55vw" alt={alt} width={1600} height={kind==='hero'?900:1067} loading={priority?'eager':'lazy'} fetchPriority={priority?'high':'auto'} decoding="async"/>}
