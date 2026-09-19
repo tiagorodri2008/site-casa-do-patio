@@ -52,7 +52,7 @@ export function Header({locale,slug=''}:{locale:Locale;slug?:string}) {
     <header className={`header${hidden?' header-hidden':''}`}>
       <a className="brand" href={home} aria-label="Casa do Pátio">casa do pátio<span>{copy.tagline[locale]}</span></a>
       <nav aria-label={locale==='pt'?'Navegação principal':'Main navigation'}>
-        <a href={`${home}#casa`}>{copy.navRestaurant[locale]}</a>
+        <a aria-current={slug===''?'page':undefined} href={`${home}#casa`}>{copy.navRestaurant[locale]}</a>
         <a aria-current={slug==='menu'?'page':undefined} href={route(locale,'menu')}>{copy.navMenu[locale]}</a>
         <a href={`${home}#visitar`}>{visit}</a>
       </nav>
