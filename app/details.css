@@ -231,7 +231,8 @@
   .brand span { display: none; }
   .header > nav { display: none; }
   .header-actions { gap: 7px; }
-  .theme-toggle { height: 32px; width: 32px; }
+  .theme-toggle { border-radius: 50%; height: 32px; padding: 0; width: 32px; }
+  .theme-toggle span { display: none; }
   .header-reservation { display: none; }
   .languages { font-size: 10px; }
   .mobile-toggle { display: inline-flex; }

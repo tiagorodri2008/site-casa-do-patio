@@ -44,6 +44,8 @@ export function Header({locale,slug=''}:{locale:Locale;slug?:string}) {
   },[open]);
 
   const dark=theme==='dark';
+  const themeLabel=dark?(locale==='pt'?'Modo claro':'Light mode'):(locale==='pt'?'Modo escuro':'Dark mode');
+  const toggleTheme=()=>setTheme(dark?'light':'dark');
   return <>
     <a className="skip-link" href="#main">{copy.skip[locale]}</a>
     <header className={`header${hidden?' header-hidden':''}`}>
@@ -56,13 +58,13 @@ export function Header({locale,slug=''}:{locale:Locale;slug?:string}) {
       </nav>
       <div className="header-actions">
         <div className="languages" aria-label={locale==='pt'?'Idioma':'Language'}><a href={route('pt',slug)} hrefLang="pt" aria-current={locale==='pt'?'true':undefined}>PT</a><span>/</span><a href={route('en',slug)} hrefLang="en" aria-current={locale==='en'?'true':undefined}>EN</a></div>
-        <button className="theme-toggle" type="button" aria-pressed={dark} aria-label={dark?(locale==='pt'?'Ativar modo claro':'Use light mode'):(locale==='pt'?'Ativar modo escuro':'Use dark mode')} onClick={()=>setTheme(dark?'light':'dark')}>{dark?<Sun size={17}/>:<Moon size={17}/>}</button>
+        <button className="theme-toggle" type="button" aria-pressed={dark} aria-label={dark?(locale==='pt'?'Ativar modo claro':'Use light mode'):(locale==='pt'?'Ativar modo escuro':'Use dark mode')} onClick={toggleTheme}>{dark?<Sun size={17}/>:<Moon size={17}/>}<span>{themeLabel}</span></button>
         {restaurant.features.reservations&&<a className="header-reservation" href={route(locale,'reservas')}>{copy.book[locale]}<ArrowUpRight size={16}/></a>}
         <button className="mobile-toggle" type="button" aria-expanded={open} aria-controls="mobile-nav" aria-label={open?(locale==='pt'?'Fechar navegação':'Close navigation'):(locale==='pt'?'Abrir navegação':'Open navigation')} onClick={()=>setOpen(!open)}>{open?<X/>:<Menu/>}</button>
       </div>
     </header>
     {open&&<nav className="mobile-nav" id="mobile-nav" aria-label={locale==='pt'?'Navegação móvel':'Mobile navigation'}>
-      <a onClick={()=>setOpen(false)} href={`${home}#casa`}>{copy.navRestaurant[locale]}</a><a onClick={()=>setOpen(false)} href={route(locale,'menu')}>{copy.navMenu[locale]}</a><a onClick={()=>setOpen(false)} href={`${home}#ambiente`}>{copy.navGallery[locale]}</a><a onClick={()=>setOpen(false)} href={`${home}#contacto`}>{contacts}</a><a onClick={()=>setOpen(false)} href={`${home}#visitar`}>{copy.navVisit[locale]}</a><a onClick={()=>setOpen(false)} href={route(locale,'reservas')}>{copy.book[locale]}</a>
+      <a onClick={()=>setOpen(false)} href={`${home}#casa`}>{copy.navRestaurant[locale]}</a><a onClick={()=>setOpen(false)} href={route(locale,'menu')}>{copy.navMenu[locale]}</a><a onClick={()=>setOpen(false)} href={`${home}#ambiente`}>{copy.navGallery[locale]}</a><a onClick={()=>setOpen(false)} href={`${home}#contacto`}>{contacts}</a><a onClick={()=>setOpen(false)} href={`${home}#visitar`}>{copy.navVisit[locale]}</a><a onClick={()=>setOpen(false)} href={route(locale,'reservas')}>{copy.book[locale]}</a><button className="mobile-theme-toggle" type="button" aria-pressed={dark} onClick={toggleTheme}>{dark?<Sun size={17}/>:<Moon size={17}/>} {themeLabel}</button>
     </nav>}
   </>;
 }
