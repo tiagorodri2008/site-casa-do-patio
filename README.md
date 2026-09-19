@@ -8,9 +8,10 @@ Node.js 22 ou superior. `npm ci`, `npm run dev`, `npm run build`. A versão est�
 
 ## Organização
 
-- `lib/restaurant.ts`: identidade, contactos, tema, funcionalidades, horários, imagens e menu bilingue.
+- `lib/restaurant.ts`: configuração por restaurante — identidade, tema, variantes de layout, contactos, localização, reservas, ações mobile, reputação, horários, imagens e menu bilingue.
 - `lib/copy.ts`: textos editoriais partilhados.
 - `lib/metadata.ts`: títulos, descrições, canonical e idiomas alternativos.
+- `lib/analytics.ts`: eventos neutros (`restaurant:event`) prontos para ligar mais tarde a uma plataforma de analytics, sem enviar dados por si só.
 - `components/`: apresentação e percursos de interação.
 - `app/`: homepage, rotas PT/EN, páginas legais, sitemap, robots e 404.
 - `public/images/`: imagens responsivas WebP, servidas localmente, sem pedidos a bancos de imagens externos.
@@ -22,7 +23,7 @@ Homepage em `/` e `/en/`; menu em `/pt/menu/` e `/en/menu/`; reservas em `/pt/re
 
 Reservas: seleção de data, hora e pessoas, rejeição de datas passadas, segundas-feiras, horários decorridos e grupos fora de 1–8. Horizonte de 90 dias. A confirmação é exclusivamente demonstrativa; não recolhe contactos, não envia pedidos, não confirma mesas reais e perde-se ao recarregar.
 
-Telefone e WhatsApp ficam sem número na demo. Os botões explicam a integração; configurar números reais ativa ligações `tel:` e `wa.me`. O mapa aponta para o bairro, sem atribuir uma morada real à marca fictícia.
+Telefone e WhatsApp ficam sem número na demo. Os botões explicam a integração; configurar números reais ativa ligações `tel:` e `wa.me`. O mapa aponta para o bairro, sem atribuir uma morada real à marca fictícia. A reputação é configurável e os dados desta versão estão identificados como demonstrativos.
 
 ## Identidade e imagens
 

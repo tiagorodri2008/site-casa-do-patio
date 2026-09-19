@@ -5,7 +5,7 @@ export function Contact({locale}:{locale:Locale}){
   const pt=locale==='pt';
   const whatsappUrl=restaurant.whatsapp?`https://wa.me/${restaurant.whatsapp.replace(/\D/g,'')}?text=${encodeURIComponent(pt?'Olá! Gostaria de reservar uma mesa.':'Hello! I would like to reserve a table.')}`:undefined;
   const contacts=[
-    {icon:Instagram,label:'Instagram',value:pt?'@casadopatio · demo':'@casadopatio · demo',href:undefined},
+    {icon:Instagram,label:'Instagram',value:restaurant.social.instagram??(pt?'@casadopatio · demo':'@casadopatio · demo'),href:restaurant.social.instagram?`https://instagram.com/${restaurant.social.instagram.replace('@','')}`:undefined},
     {icon:MessageCircle,label:'WhatsApp',value:pt?'Contacto demonstrativo':'Demo contact',href:whatsappUrl},
     {icon:Phone,label:pt?'Telefone':'Phone',value:restaurant.phone??(pt?'Em breve':'Coming soon'),href:restaurant.phone?`tel:${restaurant.phone}`:undefined},
     {icon:Mail,label:'Email',value:restaurant.email??'ola@casadopatio.pt',href:restaurant.email?`mailto:${restaurant.email}`:undefined},
