@@ -1,5 +1,6 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import './details.css';
-export const metadata: Metadata = { title:'Casa do Pátio — Cozinha portuguesa, à nossa mesa', description:'Cozinha portuguesa contemporânea, de estação e para partilhar. Uma demonstração no coração do Príncipe Real, Lisboa.', robots: {index:false, follow:false}, icons:{icon:'/favicon.svg'} };
-export default function Layout({children}:{children:React.ReactNode}) { return <html lang="pt-PT"><body>{children}</body></html>; }
+export const metadata: Metadata = { metadataBase:new URL('https://site-casa-do-patio.vercel.app'), title:{default:'Casa do Pátio — Cozinha portuguesa, à nossa mesa',template:'%s — Casa do Pátio'}, description:'Cozinha portuguesa contemporânea, sazonal e para partilhar no Príncipe Real, Lisboa. Demonstração de restaurante fictício.', robots: {index:false, follow:false}, openGraph:{type:'website',siteName:'Casa do Pátio',images:[{url:'/images/courtyard-1600.webp',width:1600,height:900,alt:'Pátio acolhedor da Casa do Pátio'}]}, twitter:{card:'summary_large_image',images:['/images/courtyard-1600.webp']}, icons:{icon:'/favicon.svg'} };
+export const viewport: Viewport = { colorScheme:'light dark', themeColor:[{media:'(prefers-color-scheme: light)',color:'#f4efe4'},{media:'(prefers-color-scheme: dark)',color:'#17130f'}], width:'device-width', initialScale:1, viewportFit:'cover' };
+export default function Layout({children}:{children:React.ReactNode}) { return <html lang="pt-PT" suppressHydrationWarning><body>{children}</body></html>; }

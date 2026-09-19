@@ -1,6 +1,14 @@
-'use client';
-import {useRef} from 'react';
-import {Phone,MessageCircle,X} from 'lucide-react';
+import {ArrowUpRight,Instagram,Mail,MessageCircle,Phone} from 'lucide-react';
 import {restaurant,Locale} from '@/lib/restaurant';
-import {copy} from '@/lib/copy';
-export function Contact({locale}:{locale:Locale}){const dialog=useRef<HTMLDialogElement>(null);const pt=locale==='pt';return <><div className="contact-actions">{restaurant.phone?<a className="text-link" href={`tel:${restaurant.phone}`}><Phone size={16}/>{restaurant.phone}</a>:<button className="text-link" onClick={()=>dialog.current?.showModal()}><Phone size={16}/>{copy.phone[locale]} · Demo</button>}{restaurant.whatsapp?<a className="text-link" href={`https://wa.me/${restaurant.whatsapp.replace(/\D/g,'')}?text=${encodeURIComponent(pt?'Olá! Gostaria de reservar uma mesa.':'Hello! I would like to book a table.')}`} target="_blank" rel="noopener noreferrer"><MessageCircle size={16}/>WhatsApp</a>:<button className="text-link" onClick={()=>dialog.current?.showModal()}><MessageCircle size={16}/>WhatsApp · Demo</button>}</div><dialog ref={dialog} className="contact-dialog" aria-labelledby="contact-title" onClick={e=>{if(e.target===e.currentTarget)dialog.current?.close()}}><button className="dialog-close" aria-label={pt?'Fechar':'Close'} onClick={()=>dialog.current?.close()}><X/></button><p className="eyebrow">DEMO</p><h2 id="contact-title">{pt?'Vamos conversar.':'Let’s talk.'}</h2><p>{pt?'Numa versão real, este botão abre o telefone ou o WhatsApp do restaurante. Nesta demonstração não ligamos nem enviamos mensagens para números fictícios.':'In a live version, this button opens the restaurant’s phone or WhatsApp. This demonstration does not call or message fictional numbers.'}</p><button className="button" onClick={()=>dialog.current?.close()}>{pt?'Percebi':'Got it'}</button></dialog></>}
+
+export function Contact({locale}:{locale:Locale}){
+  const pt=locale==='pt';
+  const whatsappUrl=restaurant.whatsapp?`https://wa.me/${restaurant.whatsapp.replace(/\D/g,'')}?text=${encodeURIComponent(pt?'Olá! Gostaria de reservar uma mesa.':'Hello! I would like to reserve a table.')}`:undefined;
+  const contacts=[
+    {icon:Instagram,label:'Instagram',value:pt?'@casadopatio · demo':'@casadopatio · demo',href:undefined},
+    {icon:MessageCircle,label:'WhatsApp',value:pt?'Contacto demonstrativo':'Demo contact',href:whatsappUrl},
+    {icon:Phone,label:pt?'Telefone':'Phone',value:restaurant.phone??(pt?'Em breve':'Coming soon'),href:restaurant.phone?`tel:${restaurant.phone}`:undefined},
+    {icon:Mail,label:'Email',value:restaurant.email??'ola@casadopatio.pt',href:restaurant.email?`mailto:${restaurant.email}`:undefined},
+  ];
+  return <section className="contact-menu section" id="contacto" aria-labelledby="contact-title"><div className="contact-menu-intro"><div><p className="eyebrow">{pt?'CONTACTOS':'CONTACT'}</p><h2 id="contact-title">{pt?'Falamos à mesa.':'Let’s talk at the table.'}</h2></div><p>{pt?'Para reservas, grupos ou apenas para saber mais, estamos por perto.':'For bookings, groups, or simply to find out more, we are close by.'}</p></div><div className="contact-menu-links">{contacts.map(({icon:Icon,label,value,href})=>href?<a key={label} href={href} target={href.startsWith('http')?'_blank':undefined} rel={href.startsWith('http')?'noopener noreferrer':undefined}><Icon aria-hidden="true" size={20}/><span><small>{label}</small><b>{value}</b></span><ArrowUpRight aria-hidden="true" size={18}/></a>:<div key={label}><Icon aria-hidden="true" size={20}/><span><small>{label}</small><b>{value}</b></span></div>)}</div></section>;
+}
