@@ -15,6 +15,10 @@ export function Header({locale,slug=''}:{locale:Locale;slug?:string}) {
   const visit=locale==='pt'?'Visitar':'Visit';
 
   useEffect(()=>{
+    document.documentElement.lang=locale==='pt'?'pt-PT':'en';
+  },[locale]);
+
+  useEffect(()=>{
     const saved=window.localStorage.getItem('casa-theme');
     const preferred=saved==='dark'||saved==='light'?saved:window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
     setTheme(preferred);
